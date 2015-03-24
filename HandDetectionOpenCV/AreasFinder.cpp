@@ -98,8 +98,11 @@ namespace hd_cv {
                     currentLabel = northLabel;
                 } else if (westValue == currentValue && northValue == currentValue) {
                     currentLabel = westLabel;
-                    set<pixelType> s {westLabel, northLabel};
-                    equivalences.push_back(s);
+                    if (westLabel != northLabel) {
+                        set<pixelType> s {westLabel, northLabel};
+                        connected.at<pixelType>(i, j - 1) = northLabel;
+                        equivalences.push_back(s);
+                    }
                     custom_merge(equivalences);
                     
                 }

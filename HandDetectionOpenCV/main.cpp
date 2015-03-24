@@ -6,6 +6,125 @@
 #include "ProcessHelper.h"
 #include "CameraCapturer.h"
 #include "AreasFinder.h"
+#include <unordered_map>
+
+void remove_small_areas(cv::Mat& mat, const int minimum_area_size) {
+    std::unordered_map<hd_cv::pixelType, std::vector<std::pair<int, int>>> map;
+    hd_cv::ProcessHelper::process_mat(mat, [&mat, &map, minimum_area_size](int i, int j) {
+        auto current_pixel = mat.at<hd_cv::pixelType>(i, j);
+        if (current_pixel > 0) {
+            auto iter = map.find(current_pixel);
+            if (iter == map.end()) {
+                std::vector<std::pair<int, int>> v {std::make_pair(i, j)};
+                map.emplace(current_pixel, v);
+            } else {
+                if (iter->second.size() < minimum_area_size) {
+                    iter->second.push_back(std::make_pair(i, j));
+                }
+            }
+        }
+    });
+    
+    for (auto& x : map) {
+        std::vector<std::pair<int, int>> v = x.second;
+        if (v.size() < minimum_area_size) {
+            for (auto& y : v) {
+                mat.at<hd_cv::pixelType>(y.first, y.second) = 0;
+            }
+        }
+    }
+}
+
+typedef std::pair<int, int> pair_of_int;
+typedef std::vector<pair_of_int> contour_type;
+typedef std::vector<contour_type> vector_of_contour;
+
+
+
+
+
+using namespace std;
+using namespace cv;
+using namespace hd_cv;
+
+pixelType label(const cv::Mat& image, int i, int j) {
+    const bool firstIsValid = i >= 0 && i < image.size().height;
+    const bool secondIsValid = j >= 0 && j < image.size().width;
+    const bool all_is_valid = firstIsValid && secondIsValid;
+    if (all_is_valid) {
+        return image.at<pixelType>(i, j);
+    }
+    return 0;
+}
+vector<pair_of_int> neighbours(const cv::Mat& image, int i, int j) {
+    return {make_pair(i, j - 1), make_pair(i-1, j-1), make_pair(i-1, j), make_pair(i - 1, j + 1),  make_pair(i, j + 1), make_pair(i + 1, j + 1), make_pair(i + 1, j), make_pair(i + 1, j - 1),};
+//    vector<pair_of_int> result {};
+//    for (auto &x : ns) {
+//        const bool firstIsValid = x.first >= 0 && x.first < image.size().height;
+//        const bool secondIsValid = x.second >= 0 && x.second < image.size().width;
+//        const bool pixelIsValid = image.at<pixelType>(i,j) > 0;
+//        const bool allIsValid = firstIsValid && secondIsValid && pixelIsValid;
+//        if (allIsValid) {
+//            result.push_back(x);
+//        }
+//    }
+//    return result;
+}
+
+contour_type contour(const Mat& image, const pair_of_int& start, hd_cv::pixelType const current_label) {
+    contour_type v {start};
+    int i = start.first;
+    int j = start.second;
+    pair_of_int enter_from = std::make_pair(i - 1, j);
+    pair_of_int next_pixel = std::make_pair(- 1, -1);
+    while (next_pixel != start) {
+        pair_of_int p = v[v.size() - 1];
+        auto ns = neighbours(image, p.first, p.second);
+        auto e_f = find(ns.begin(), ns.end(), enter_from);
+        vector<pair_of_int> tempV (ns.size());
+//        move(e_f, ns.end(), tempV);
+//        move(ns.begin(), e_f, tempV);
+        vector<pixelType> ns_labels (ns.size());
+        auto iter = 0;
+//        for (auto i = 0; i < ns_labels.size(); i++) {
+        for (auto& x :ns_labels) {
+            ns_labels[iter] = label(image, ns[iter].first, ns[iter].second);
+            iter++;
+        }
+        auto it = find(ns_labels.begin(), ns_labels.end(), current_label) ;
+        long pixel_with_label_index;
+        if (it != ns_labels.end()) {
+            pixel_with_label_index = it - ns_labels.begin();
+        } else {
+            pixel_with_label_index = -666;
+            break;
+        }
+        next_pixel = ns[pixel_with_label_index];
+        if (pixel_with_label_index == 0) {
+            enter_from = ns[ns.size() - 1];
+        } else {
+            enter_from = ns[pixel_with_label_index - 1];
+        }
+        v.push_back(next_pixel);
+        for (auto& x : v) {
+            swap(x.first, x.second);
+        }
+    }
+    return v;
+}
+
+vector_of_contour countour_moore(const cv::Mat& mat) {
+    vector_of_contour v {};
+    vector<pixelType> labels;
+    ProcessHelper::process_mat(mat, [&mat, &labels, &v](int i, int j) {
+        pixelType current_label = mat.at<pixelType>(i, j);
+        if (find(labels.begin(), labels.end(), current_label) == labels.end()) {
+            v.push_back(contour(mat, make_pair(i, j), current_label));
+            labels.push_back(current_label);
+        }
+    });
+    return v;
+}
 
 void custom_main() {
     hd_cv::CameraCapturer cc = hd_cv::CameraCapturer();
@@ -13,6 +132,12 @@ void custom_main() {
     cv::Mat src = cc.output();
     
     cv::Mat connected = hd_cv::AreasFinder::areas_two_pass(src);
+    
+    static const int minimum_size = 500;
+    remove_small_areas(connected, minimum_size);
+    
+    auto v = countour_moore(connected);
+    drawContours(connected, v, -1, Scalar(255, 0, 0));
     imshow("connected", connected * 1000);
     imshow("src", src * 40);
     cv::waitKey(0);
@@ -20,7 +145,20 @@ void custom_main() {
 
 
 int main() {
-    custom_main();
+    auto test_pair = make_pair(3, 4);
+    vector<pair<int, int>> v = {make_pair(1, 2), make_pair(1, 2), test_pair, make_pair(5, 6), make_pair(7, 8)};
+    auto e = find(v.begin(), v.end(), test_pair);
+    
+    iter_swap(e - 1, e);
+//    swap_ranges(e, e + v.size() - 1, e - 1);
+//    vector<pair<int, int>> v1 (v.size());
+//    move(e, v.end(), v1.begin());
+//    move(v.begin(), e, v1.end() - e);
+    
+    for (auto& x : v) {
+        cout << x.first << " " << x.second << "\n";
+    }
+//    custom_main();
     return 0;
 }
 
