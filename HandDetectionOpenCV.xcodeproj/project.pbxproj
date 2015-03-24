@@ -26,6 +26,9 @@
 		B7732F931AAE367E0051935E /* libopencv_ts.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7732F801AAE367E0051935E /* libopencv_ts.a */; };
 		B7732F941AAE367F0051935E /* libopencv_video.2.4.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B7732F811AAE367E0051935E /* libopencv_video.2.4.9.dylib */; };
 		B7732F951AAE367F0051935E /* libopencv_videostab.2.4.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B7732F821AAE367E0051935E /* libopencv_videostab.2.4.9.dylib */; };
+		B785A43B1AC130A800181BBA /* ProcessHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B785A4391AC130A800181BBA /* ProcessHelper.cpp */; };
+		B785A43E1AC1329500181BBA /* CameraCapturer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B785A43C1AC1329500181BBA /* CameraCapturer.cpp */; };
+		B785A4411AC1384800181BBA /* AreasFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B785A43F1AC1384800181BBA /* AreasFinder.cpp */; };
 		B796D0281A9B835800E00B47 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B796D0271A9B835800E00B47 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +66,12 @@
 		B7732F821AAE367E0051935E /* libopencv_videostab.2.4.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libopencv_videostab.2.4.9.dylib; sourceTree = "<group>"; };
 		B785A4371AC0A99F00181BBA /* test.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = test.jpg; sourceTree = "<group>"; };
 		B785A4381AC0CD4000181BBA /* test.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = test.tiff; sourceTree = "<group>"; };
+		B785A4391AC130A800181BBA /* ProcessHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProcessHelper.cpp; sourceTree = "<group>"; };
+		B785A43A1AC130A800181BBA /* ProcessHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessHelper.h; sourceTree = "<group>"; };
+		B785A43C1AC1329500181BBA /* CameraCapturer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraCapturer.cpp; sourceTree = "<group>"; };
+		B785A43D1AC1329500181BBA /* CameraCapturer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraCapturer.h; sourceTree = "<group>"; };
+		B785A43F1AC1384800181BBA /* AreasFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AreasFinder.cpp; sourceTree = "<group>"; };
+		B785A4401AC1384800181BBA /* AreasFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreasFinder.h; sourceTree = "<group>"; };
 		B796D0241A9B835800E00B47 /* HandDetectionOpenCV */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HandDetectionOpenCV; sourceTree = BUILT_PRODUCTS_DIR; };
 		B796D0271A9B835800E00B47 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +155,12 @@
 				B785A4371AC0A99F00181BBA /* test.jpg */,
 				B785A4381AC0CD4000181BBA /* test.tiff */,
 				B796D0271A9B835800E00B47 /* main.cpp */,
+				B785A4391AC130A800181BBA /* ProcessHelper.cpp */,
+				B785A43A1AC130A800181BBA /* ProcessHelper.h */,
+				B785A43C1AC1329500181BBA /* CameraCapturer.cpp */,
+				B785A43D1AC1329500181BBA /* CameraCapturer.h */,
+				B785A43F1AC1384800181BBA /* AreasFinder.cpp */,
+				B785A4401AC1384800181BBA /* AreasFinder.h */,
 			);
 			path = HandDetectionOpenCV;
 			sourceTree = "<group>";
@@ -206,7 +221,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B785A4411AC1384800181BBA /* AreasFinder.cpp in Sources */,
+				B785A43E1AC1329500181BBA /* CameraCapturer.cpp in Sources */,
 				B796D0281A9B835800E00B47 /* main.cpp in Sources */,
+				B785A43B1AC130A800181BBA /* ProcessHelper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
