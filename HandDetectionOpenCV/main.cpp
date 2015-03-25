@@ -145,20 +145,7 @@ void custom_main() {
 
 
 int main() {
-    auto test_pair = make_pair(3, 4);
-    vector<pair<int, int>> v = {make_pair(1, 2), make_pair(1, 2), test_pair, make_pair(5, 6), make_pair(7, 8)};
-    auto e = find(v.begin(), v.end(), test_pair);
-    
-    iter_swap(e - 1, e);
-//    swap_ranges(e, e + v.size() - 1, e - 1);
-//    vector<pair<int, int>> v1 (v.size());
-//    move(e, v.end(), v1.begin());
-//    move(v.begin(), e, v1.end() - e);
-    
-    for (auto& x : v) {
-        cout << x.first << " " << x.second << "\n";
-    }
-//    custom_main();
+    custom_main();
     return 0;
 }
 
