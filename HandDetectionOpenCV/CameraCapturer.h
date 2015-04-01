@@ -15,30 +15,32 @@
 namespace hd_cv {
     class CameraCapturer {
     public:
-        CameraCapturer() : _capture(cv::VideoCapture(0)), _mog(new cv::BackgroundSubtractorMOG()), _frame(cv::Mat(defaultSize.width, defaultSize.height, CV_16UC1)), _output(cv::Mat(defaultSize.width, defaultSize.height, CV_16UC1)) {
-            
+        CameraCapturer() : _capture(cv::VideoCapture(0)), _mog(new cv::BackgroundSubtractorMOG(10, 2, 0.1f)), _frame(cv::Mat(defaultSize.width, defaultSize.height, CV_16UC1)), _output(cv::Mat(defaultSize.width, defaultSize.height, CV_16UC1)) {
+            _capture.set(CV_CAP_PROP_FRAME_WIDTH, defaultSize.width);
+            _capture.set(CV_CAP_PROP_FRAME_HEIGHT, defaultSize.height);
+            _capture.set(CV_CAP_PROP_FPS, 30);
         }
         
-        const cv::VideoCapture& capture() const{
-            return _capture;
-        }
-        
-        const cv::Mat& frame() const{
-            return _frame;
-        }
+//        const cv::VideoCapture& capture() const{
+//            return _capture;
+//        }
+//        
+//        const cv::Mat& frame() const{
+//            return _frame;
+//        }
         
         const cv::Mat& output() const{
             return _output;
         }
         
-        cv::Mat& output() {
-            return _output;
-        }
+//        cv::Mat& output() {
+//            return _output;
+//        }
         
-        const cv::BackgroundSubtractorMOG& mog() const{
-            return (*_mog);
-        }
-        
+//        const cv::BackgroundSubtractorMOG& mog() const{
+//            return (*_mog);
+//        }
+        void foo(std::function<void(cv::Mat&)>f);
         void start_capturing_with_mog();
         
     private:

@@ -11,6 +11,7 @@
 #include <opencv2/opencv.hpp>
 
 namespace hd_cv  {
+    
     typedef uint16_t pixelType;
     static const cv::Size defaultSize = cv::Size(512,256);
     class ProcessHelper {
@@ -33,6 +34,21 @@ namespace hd_cv  {
         }
         
     };
+    
+    template<typename T>
+    std::complex<T> real(const std::complex<T> & c) {
+        return std::complex<T>(c.real(), 0);
+    }
+    
+    template<typename T>
+    std::vector<T> vallaray_to_vector(const std::valarray<std::complex<T>>& v) {
+        std::vector<T> result (v.size());
+        for (auto& x : v) {
+            result.push_back(x.real());
+        }
+        return result;
+    }
+    
 }
 
 #endif /* defined(__HandDetectionOpenCV__ProcessHelper__) */

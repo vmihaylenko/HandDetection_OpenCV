@@ -30,6 +30,10 @@
 		B785A43E1AC1329500181BBA /* CameraCapturer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B785A43C1AC1329500181BBA /* CameraCapturer.cpp */; };
 		B785A4411AC1384800181BBA /* AreasFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B785A43F1AC1384800181BBA /* AreasFinder.cpp */; };
 		B796D0281A9B835800E00B47 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B796D0271A9B835800E00B47 /* main.cpp */; };
+		B7C967811ACC88FF00309F6C /* FFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7C9677F1ACC88FF00309F6C /* FFT.cpp */; };
+		B7C967841ACC8B3D00309F6C /* HandDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7C967821ACC8B3D00309F6C /* HandDetector.cpp */; };
+		B7C967871ACC8D5200309F6C /* RemoveAreas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7C967851ACC8D5200309F6C /* RemoveAreas.cpp */; };
+		B7C9678D1ACC90F900309F6C /* Contour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7C9678B1ACC90F900309F6C /* Contour.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,6 +78,14 @@
 		B785A4401AC1384800181BBA /* AreasFinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AreasFinder.h; sourceTree = "<group>"; };
 		B796D0241A9B835800E00B47 /* HandDetectionOpenCV */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HandDetectionOpenCV; sourceTree = BUILT_PRODUCTS_DIR; };
 		B796D0271A9B835800E00B47 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B7C9677F1ACC88FF00309F6C /* FFT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FFT.cpp; sourceTree = "<group>"; };
+		B7C967801ACC88FF00309F6C /* FFT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFT.h; sourceTree = "<group>"; };
+		B7C967821ACC8B3D00309F6C /* HandDetector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HandDetector.cpp; sourceTree = "<group>"; };
+		B7C967831ACC8B3D00309F6C /* HandDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandDetector.h; sourceTree = "<group>"; };
+		B7C967851ACC8D5200309F6C /* RemoveAreas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RemoveAreas.cpp; sourceTree = "<group>"; };
+		B7C967861ACC8D5200309F6C /* RemoveAreas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoveAreas.h; sourceTree = "<group>"; };
+		B7C9678B1ACC90F900309F6C /* Contour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Contour.cpp; sourceTree = "<group>"; };
+		B7C9678C1ACC90F900309F6C /* Contour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contour.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +173,14 @@
 				B785A43D1AC1329500181BBA /* CameraCapturer.h */,
 				B785A43F1AC1384800181BBA /* AreasFinder.cpp */,
 				B785A4401AC1384800181BBA /* AreasFinder.h */,
+				B7C9677F1ACC88FF00309F6C /* FFT.cpp */,
+				B7C967801ACC88FF00309F6C /* FFT.h */,
+				B7C967821ACC8B3D00309F6C /* HandDetector.cpp */,
+				B7C967831ACC8B3D00309F6C /* HandDetector.h */,
+				B7C967851ACC8D5200309F6C /* RemoveAreas.cpp */,
+				B7C967861ACC8D5200309F6C /* RemoveAreas.h */,
+				B7C9678B1ACC90F900309F6C /* Contour.cpp */,
+				B7C9678C1ACC90F900309F6C /* Contour.h */,
 			);
 			path = HandDetectionOpenCV;
 			sourceTree = "<group>";
@@ -222,8 +242,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B785A4411AC1384800181BBA /* AreasFinder.cpp in Sources */,
+				B7C967811ACC88FF00309F6C /* FFT.cpp in Sources */,
+				B7C967841ACC8B3D00309F6C /* HandDetector.cpp in Sources */,
 				B785A43E1AC1329500181BBA /* CameraCapturer.cpp in Sources */,
+				B7C967871ACC8D5200309F6C /* RemoveAreas.cpp in Sources */,
 				B796D0281A9B835800E00B47 /* main.cpp in Sources */,
+				B7C9678D1ACC90F900309F6C /* Contour.cpp in Sources */,
 				B785A43B1AC130A800181BBA /* ProcessHelper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
