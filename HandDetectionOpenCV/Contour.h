@@ -17,6 +17,7 @@ namespace hd_cv
 {
     vector_of_contour countour_moore(const cv::Mat& mat);
     bool is_not_palm(contour_type& c);
+    std::vector<double> contour_coors_to_curvature(const contour_type& contours);
 }
 
 #endif /* defined(__HandDetectionOpenCV__Contour__) */

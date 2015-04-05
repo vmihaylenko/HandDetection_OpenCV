@@ -10,6 +10,7 @@
 #include "AreasFinder.h"
 #include "RemoveAreas.h"
 #include "Contour.h"
+#include "Plot.h"
 
 
 namespace hd_cv
@@ -33,6 +34,13 @@ void HandDetector::detect_hand_on_image(const cv::Mat &im)
     cv::Mat result = cv::Mat::zeros(im.size(), CV_8UC3);
     cv::drawContours(result, v, -1, cv::Scalar(255, 0, 0), 5);
     imshow("src", result);
+    auto i = 1;
+    for (auto& x : v)
+    {
+        const std::string s (i, 'x');
+        plot(contour_coors_to_curvature(x), s);
+        i++;
+    }
     cv::waitKey(0);
 }
     

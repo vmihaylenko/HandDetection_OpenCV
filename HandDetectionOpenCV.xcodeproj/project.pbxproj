@@ -34,6 +34,7 @@
 		B7C967841ACC8B3D00309F6C /* HandDetector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7C967821ACC8B3D00309F6C /* HandDetector.cpp */; };
 		B7C967871ACC8D5200309F6C /* RemoveAreas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7C967851ACC8D5200309F6C /* RemoveAreas.cpp */; };
 		B7C9678D1ACC90F900309F6C /* Contour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7C9678B1ACC90F900309F6C /* Contour.cpp */; };
+		B7C967901AD1B73000309F6C /* Plot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B7C9678E1AD1B73000309F6C /* Plot.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +87,8 @@
 		B7C967861ACC8D5200309F6C /* RemoveAreas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoveAreas.h; sourceTree = "<group>"; };
 		B7C9678B1ACC90F900309F6C /* Contour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Contour.cpp; sourceTree = "<group>"; };
 		B7C9678C1ACC90F900309F6C /* Contour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contour.h; sourceTree = "<group>"; };
+		B7C9678E1AD1B73000309F6C /* Plot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plot.cpp; sourceTree = "<group>"; };
+		B7C9678F1AD1B73000309F6C /* Plot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plot.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,8 @@
 				B7C967861ACC8D5200309F6C /* RemoveAreas.h */,
 				B7C9678B1ACC90F900309F6C /* Contour.cpp */,
 				B7C9678C1ACC90F900309F6C /* Contour.h */,
+				B7C9678E1AD1B73000309F6C /* Plot.cpp */,
+				B7C9678F1AD1B73000309F6C /* Plot.h */,
 			);
 			path = HandDetectionOpenCV;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7C967901AD1B73000309F6C /* Plot.cpp in Sources */,
 				B785A4411AC1384800181BBA /* AreasFinder.cpp in Sources */,
 				B7C967811ACC88FF00309F6C /* FFT.cpp in Sources */,
 				B7C967841ACC8B3D00309F6C /* HandDetector.cpp in Sources */,
