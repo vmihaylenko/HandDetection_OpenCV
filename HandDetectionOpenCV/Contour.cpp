@@ -195,8 +195,8 @@ namespace hd_cv
       ys[i] = v[i].y;
     }
     
-    auto xc = std::accumulate(xs.begin(), xs.end(), 0);
-    auto yc = std::accumulate(ys.begin(), ys.end(), 0);
+    double xc = std::accumulate(xs.begin(), xs.end(), 0);
+    double yc = std::accumulate(ys.begin(), ys.end(), 0);
     
     xc /= size;
     yc /= size;
@@ -228,17 +228,18 @@ namespace hd_cv
     auto m21 = suv;
     auto m22 = svv;
     
-    auto b1 = (suuu + suvv)/2;
-    auto b2 = (svvv + svuu)/2;
+//    auto b1 = (suuu + suvv)/2;
+//    auto b2 = (svvv + svuu)/2;
     
     auto delta = m11 * m22 - m12 * m21;
-    if (!delta)
-      return 0;
+    if (delta < 0.00001f)
+      return 1/sqrt((suu + svv)/size);
     
-    auto uc = (m22 * b1 - m12 * b2)/delta;
-    auto vc = (m11 * b2 - m21 * b1)/delta;
+//    auto uc = (m22 * b1 - m12 * b2)/delta;
+//    auto vc = (m11 * b2 - m21 * b1)/delta;
     
-    auto r = sqrt(uc * uc + vc * vc + (suu + svv) / size);
+//    auto r = sqrt(uc * uc + vc * vc + (suu + svv) / size);
+    auto r = sqrt((suu + svv) / size);
     
     if (!r)
       return 100;
@@ -260,17 +261,17 @@ namespace hd_cv
     vector<double> v (length);
     for (auto i = 0; i < length; i++)
     {
-      v[i] = curv({contours[i], contours[(i + 1 + length) % length], contours[(i + 2 + length) % length], contours[(i - 1 + length) % length], contours[(i - 2 + length) % length]});
-      //          auto x = i > 0 ? contours[i - 1] : contours[length - 1];
-      //          auto y = contours[i];
-      //          auto z = contours[(i + 1) & length];
-      //          auto p1 = x - y;
-      //          auto a = sqrt(p1.x * p1.x + p1.y * p1.y);
-      //          auto p2 = z - y;
-      //          auto b = sqrt(p2.x * p2.x + p2.y * p2.y);
-      //          auto p3 = x - z;
-      //          auto c = sqrt(p3.x * p3.x + p3.y * p3.y);
-      //          v[i] = curvature(a, b, c);
+//      v[i] = curv({contours[i], contours[(i + 1 + length) % length], contours[(i + 2 + length) % length], contours[(i - 1 + length) % length], contours[(i - 2 + length) % length], contours[(i + 3 + length) % length], contours[(i + 4 + length) % length], contours[(i - 3 + length) % length], contours[(i - 4 + length) % length]});
+                auto x = i > 0 ? contours[i - 1] : contours[length - 1];
+                auto y = contours[i];
+                auto z = contours[(i + 1) & length];
+                auto p1 = x - y;
+                auto a = sqrt(p1.x * p1.x + p1.y * p1.y);
+                auto p2 = z - y;
+                auto b = sqrt(p2.x * p2.x + p2.y * p2.y);
+                auto p3 = x - z;
+                auto c = sqrt(p3.x * p3.x + p3.y * p3.y);
+                v[i] = curvature(a, b, c);
     }
     return v;
   }
