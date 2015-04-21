@@ -9,7 +9,7 @@
 #include "CameraCapturer.h"
 #include "ProcessHelper.h"
 #include <opencv2/highgui/highgui.hpp>
-#include <opencv/cvaux.hpp>
+//#include <opencv/cvaux.hpp>
 
 namespace hd_cv {
     void CameraCapturer::start_capturing_with_mog() {
