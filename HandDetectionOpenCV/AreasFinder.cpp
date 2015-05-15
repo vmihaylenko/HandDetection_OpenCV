@@ -70,7 +70,12 @@ void AreasFinder::custom_merge(vector<set<T>>& v) {
 
 Mat AreasFinder::areas_two_pass(const Mat& image) {
     typedef vector<set<pixelType>> vectorOfSets;
-    Mat connected = Mat::zeros(image.rows, image.cols, CV_16UC1);
+    Mat connected = Mat::zeros(image.rows, image.cols, CV_8UC1);
+    /*
+    for (auto i=0; i<connected.rows; i++)
+        for(auto j=0; j<connected.cols; j++)
+            connected.at<pixelType>(i,j) = 0;
+    */    
     int objects = 0;
     vectorOfSets equivalences {};
     ProcessHelper::process_mat(image, [&image, &connected, &objects, &equivalences](int i, int j) {
@@ -92,6 +97,7 @@ Mat AreasFinder::areas_two_pass(const Mat& image) {
             if (westValue != currentValue && northValue != currentValue) {
                 objects++;
                 currentLabel = objects;
+                
             } else if (westValue == currentValue && northValue != currentValue) {
                 currentLabel = westLabel;
             } else if (westValue != currentValue && northValue == currentValue) {
@@ -106,7 +112,9 @@ Mat AreasFinder::areas_two_pass(const Mat& image) {
                 custom_merge(equivalences);
                 
             }
+            
             connected.at<pixelType>(i,j) = currentLabel;
+            
         }
     });
     
@@ -131,7 +139,7 @@ Mat AreasFinder::areas_two_pass(const Mat& image) {
     ProcessHelper::process_mat(connected, [&connected, &labelMap](int i, int j) {
         connected.at<pixelType>(i, j) = labelMap[connected.at<pixelType>(i, j)];
     });
-    
+    std::cout<<connected.size()<<std::endl;
     return connected;
 }
     

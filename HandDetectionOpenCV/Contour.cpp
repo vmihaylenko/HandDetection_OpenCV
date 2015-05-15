@@ -75,11 +75,12 @@ namespace hd_cv
     vector<pixelType> labels;
     ProcessHelper::process_mat(mat, [&mat, &labels, &v](int i, int j) {
       pixelType current_label = mat.at<pixelType>(i, j);
-      if (find(labels.begin(), labels.end(), current_label) == labels.end()) {
+      if ((current_label > 0) && find(labels.begin(), labels.end(), current_label) == labels.end()) {
         v.push_back(contour(mat, Point(i, j), current_label));
         labels.push_back(current_label);
       }
     });
+    std::cout<<"countour_moore "<<mat.size()<<std::endl;
     return v;
   }
   
@@ -173,9 +174,9 @@ namespace hd_cv
     CArray multiplication_result = first * second;
     ifft(multiplication_result);
     auto final = multiplication_result.apply(real);
-    auto result_vector = vallaray_to_vector(final);
-    auto max = *max_element(result_vector.begin(), result_vector.end());
-    return max/length;
+    //auto result_vector = vallaray_to_vector(final);
+    //auto max = *max_element(result_vector.begin(), result_vector.end());
+    return 1;//max/length;
   }
   
   bool is_not_palm(contour_type& c) {
@@ -250,28 +251,35 @@ namespace hd_cv
   template <typename T>
   double curvature(T a, T b, T c)
   {
+    if (a * b * c == 0) {
+       return 0;
+    }
     double p = (a + b + c)/2;
     double s = sqrt(p * (p - a) * (p - b) * (p - c));
-    return 4 * s / (a * b * c);
+       
+    return s / c;
   }
   
   vector<double> contour_coors_to_curvature(const contour_type& contours)
   {
     auto length = contours.size();
     vector<double> v (length);
+        
     for (auto i = 0; i < length; i++)
     {
 //      v[i] = curv({contours[i], contours[(i + 1 + length) % length], contours[(i + 2 + length) % length], contours[(i - 1 + length) % length], contours[(i - 2 + length) % length], contours[(i + 3 + length) % length], contours[(i + 4 + length) % length], contours[(i - 3 + length) % length], contours[(i - 4 + length) % length]});
-                auto x = i > 0 ? contours[i - 1] : contours[length - 1];
+                auto step = 20;                
+                auto x = contours[(i - step + length) % length];
                 auto y = contours[i];
-                auto z = contours[(i + 1) & length];
+                auto z = contours[(i + step) % length];
                 auto p1 = x - y;
-                auto a = sqrt(p1.x * p1.x + p1.y * p1.y);
+                double a = sqrt(p1.x * p1.x + p1.y * p1.y);
                 auto p2 = z - y;
-                auto b = sqrt(p2.x * p2.x + p2.y * p2.y);
+                double b = sqrt(p2.x * p2.x + p2.y * p2.y);
                 auto p3 = x - z;
-                auto c = sqrt(p3.x * p3.x + p3.y * p3.y);
+                double c = sqrt(p3.x * p3.x + p3.y * p3.y);
                 v[i] = curvature(a, b, c);
+                
     }
     return v;
   }
