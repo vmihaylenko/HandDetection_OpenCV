@@ -9,6 +9,7 @@
 #ifndef __HandDetectionOpenCV__Plot__
 #define __HandDetectionOpenCV__Plot__
 #include <vector>
+#include <string>
 
 namespace hd_cv
 {

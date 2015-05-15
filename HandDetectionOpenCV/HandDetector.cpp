@@ -18,8 +18,12 @@ namespace hd_cv
     
 void HandDetector::detect_hand_on_image(const cv::Mat &im)
 {
+    std::cout<<im.size()<<std::endl;
+    cv::imshow("image", im);
+    std::cout<<im.size()<<std::endl;
+    
     auto connected = AreasFinder::areas_two_pass(im);
-    static const int minimum_size = 500;
+    static const int minimum_size = 10;
     remove_small_areas(connected, minimum_size);
     
     auto v = countour_moore(connected);
@@ -28,11 +32,13 @@ void HandDetector::detect_hand_on_image(const cv::Mat &im)
             std::swap(p.x, p.y);
         }
     }
+    std::cout<<connected.size()<<std::endl;
     cv::drawContours(connected, v, -1, cv::Scalar(255, 0, 0), 5);
-    cv::imshow("connected", connected * 1000);
-    v.erase(remove_if(v.begin(), v.end(), is_not_palm), v.end());
-    cv::Mat result = cv::Mat::zeros(im.size(), CV_8UC3);
+    cv::imshow("connected", connected * 10);
+    //v.erase(remove_if(v.begin(), v.end(), is_not_palm), v.end());
+    cv::Mat result = cv::Mat::zeros(im.size(), CV_8UC1);
     cv::drawContours(result, v, -1, cv::Scalar(255, 0, 0), 5);
+    std::cout<<connected.size()<<std::endl;    
     imshow("src", result);
     auto i = 1;
     for (auto& x : v)

@@ -9,11 +9,12 @@
 #ifndef __HandDetectionOpenCV__ProcessHelper__
 #define __HandDetectionOpenCV__ProcessHelper__
 #include <opencv2/opencv.hpp>
+#include <functional>
 
 namespace hd_cv  {
     
-    typedef uint16_t pixelType;
-    static const cv::Size defaultSize = cv::Size(512,256);
+    typedef uint8_t pixelType;
+    static const cv::Size defaultSize = cv::Size(640,480);
     class ProcessHelper {
     public:
         
